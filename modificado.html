@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+
+        <title>Activity</title>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    </head>
+    <body>
+        <?php
+            include('class.database.php');
+            
+        ?>
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span12">
+                            <br />
+                            <br />
+                    <div class="row-fluid">
+                        <div class="span6">
+
+                            <button type="button" onClick="parent.location='index.html'">Todos los clientes</button>
+                            <button type="button" onClick="parent.location='nuevo.html'">Nuevo cliente</button>
+                            <button type="button" onclick="parent.location='modificar.html'">Modificar cliente</button>
+                            
+
+                            <?php 
+
+                                if(isset($_GET['nombre'])) {
+
+                                    $idCl = $_GET['ID'];
+                                    $nombre = $_GET['nombre'];
+                                    $dni = $_GET['dni'];
+                                    $loc = $_GET['localidades'];
+
+                                    $db = new class_db();
+                                    $con = $db->conn ;
+
+                                    $result = $con->query("SELECT id FROM localidades WHERE nombre ='".$loc."'");
+                                    $row = $result->fetch_assoc();
+
+                                    $idLoc = $row['id'];                                   
+
+                                    $result = $con->query("UPDATE clientes SET nombre='".$nombre."', dni=".$dni.", localidad=".$idLoc." WHERE id=".$idCl) ;
+                                    
+                                    
+
+                                    if ($result) {
+                            ?>
+                                        <h2> El nuevo cliente fue modificado exitosamente </h2>
+                                        Nombre: <?php echo $nombre; ?><br>
+                                        DNI: <?php echo $dni; ?><br>
+                                        Localidad: <?php echo $loc; ?>
+                                        <br><br>
+                            <?php
+                                    }
+                                    else
+                                        echo "No se pudo agregar el nuevo cliente. Disculpe las molestias." ;
+                                }
+                            ?>   
+                            
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

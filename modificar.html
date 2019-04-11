@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+
+        <title>Activity</title>
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen">
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    </head>
+    <body>
+        <?php
+            include('class.database.php');
+            
+        ?>
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span12">
+                            <br />
+                            <br />
+                    <div class="row-fluid">
+                        <div class="span6">
+
+                            <button type="button" onClick="parent.location='index.html'">Todos los clientes</button>
+                            <button type="button" onclick="parent.location='nuevo.html'">Nuevo cliente</button>
+                            <h2> Modificar cliente </h2>
+                            <br><br>
+                                                     
+                            <form action="/Proyecto/modificado.html">
+                                ID:<br>
+                                <input type="number" name="ID">
+                                <br><br>
+
+                                Nombre:<br>
+                                <input type="text" name="nombre">
+                                <br><br>
+
+                                DNI:<br>
+                                <input type="number" name="dni">
+                                <br><br>
+
+                                Localidad:<br>
+                                <select name="localidades">
+
+                                    <?php
+                                        $db = new class_db();
+                                        $con = $db->conn ;
+                                        $result = $con->query("select nombre from localidades") ;
+                                        if ($result) {
+                                            
+
+                                            while($row = $result->fetch_assoc()){
+                                    
+                                    ?>
+
+                                        <option > <?php echo $row['nombre'] ?> </option>
+                                        
+                                        <?php
+                                            }
+                                        }
+                                    ?>
+
+                                    
+                                </select>
+                                <br><br>
+
+                                <input type="submit" value="Modificar">
+                            </form> 
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
