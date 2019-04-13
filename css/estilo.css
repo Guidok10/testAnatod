@@ -1,0 +1,59 @@
+head {
+  font-family: "Verdana", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/*h1 { color: #a7e8f8; font-size: 48px; font-family: 'Signika', sans-serif; padding-bottom: 10px; }*/
+
+h1 { font-size: 30px; letter-spacing: -1px; color: #004d1a; text-transform: uppercase; text-shadow: 1px 1px 0 #000, margin: 10px 0 24px; line-height: 50px; }
+
+td, th {
+  font-family: "Verdana", Arial, Helvetica, sans-serif;
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2;}
+
+tr:hover {background-color: #ddd;}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+button, form, #aplicar{
+  font-family: "Verdana", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  border: 5px solid #ddd;
+  border-radius: 15px;
+  outline: none;
+  border-color: #4CAF50;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.submit{
+  font-family: "Verdana", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  border: 5px solid #ddd;
+  border-radius: 15px;
+  outline: none;
+  border-color: #4CAF50;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.container {
+  /*text-align: center;*/
+  margin: auto;
+  width: 50%;
+}

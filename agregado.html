@@ -4,67 +4,56 @@
         <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
         <meta content="utf-8" http-equiv="encoding">
 
-        <title>Activity</title>
-        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="screen">
-
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <title>Prueba Anatod</title>
+        <link href="css/estilo.css" rel="stylesheet" type="text/css" media="screen"> 
     </head>
     <body>
         <?php
             include('class.database.php');
             
         ?>
-        <div class="container">
-            <div class="row-fluid">
-                <div class="span12">
-                            <br />
-                            <br />
-                    <div class="row-fluid">
-                        <div class="span6">
+        <div class="container">              
 
-                            <button type="button" onClick="parent.location='index.html'">Todos los clientes</button>
-                            <button type="button" onClick="parent.location='nuevo.html'">Nuevo cliente</button>
-                            <button type="button" onclick="parent.location='modificar.html'">Modificar cliente</button>
+            <button type="button" onClick="parent.location='index.html'">Todos los clientes</button>
+            <button type="button" onClick="parent.location='nuevo.html'">Nuevo cliente</button>
+            <button type="button" onclick="parent.location='modificar.html'">Modificar cliente</button>
+            
+
+            <?php 
+
+                if(isset($_GET['nombre'])) {
+
+                    $nombre = $_GET['nombre'];
+                    $dni = $_GET['dni'];
+                    $loc = $_GET['localidades'];
+
+                    $db = new class_db();
+                    $con = $db->conn ;
+
+                    $result = $con->query("SELECT id FROM localidades WHERE nombre ='".$loc."'");
+                    $row = $result->fetch_assoc();
+
+                    $idLoc = $row['id'];                                   
+
+                    $result = $con->query("INSERT INTO clientes(nombre,dni,localidad) VALUES ('".$nombre."',".$dni.",".$idLoc.")") ;
+                    if ($result) {
+            ?>
+                    <br>
+                    <form>
+                        <h1> El nuevo cliente fue agregado exitosamente </h1>
+                        Nombre: <?php echo $nombre; ?><br>
+                        DNI: <?php echo $dni; ?><br>
+                        Localidad: <?php echo $loc; ?>
+                        <br><br>
+                    </form>
+            <?php
+                    }
+                    else
+                        echo "No se pudo agregar el nuevo cliente. Disculpe las molestias." ;
+                }
+            ?>   
                             
-
-                            <?php 
-
-                                if(isset($_GET['nombre'])) {
-
-                                    $nombre = $_GET['nombre'];
-                                    $dni = $_GET['dni'];
-                                    $loc = $_GET['localidades'];
-
-                                    $db = new class_db();
-                                    $con = $db->conn ;
-
-                                    $result = $con->query("SELECT id FROM localidades WHERE nombre ='".$loc."'");
-                                    $row = $result->fetch_assoc();
-
-                                    $idLoc = $row['id'];                                   
-
-                                    $result = $con->query("INSERT INTO clientes(nombre,dni,localidad) VALUES ('".$nombre."',".$dni.",".$idLoc.")") ;
-                                    if ($result) {
-                            ?>
-                                        <h2> El nuevo cliente fue agregado exitosamente </h2>
-                                        Nombre: <?php echo $nombre; ?><br>
-                                        DNI: <?php echo $dni; ?><br>
-                                        Localidad: <?php echo $loc; ?>
-                                        <br><br>
-                            <?php
-                                    }
-                                    else
-                                        echo "No se pudo agregar el nuevo cliente. Disculpe las molestias." ;
-                                }
-                            ?>   
-                            
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+   
         </div>
     </body>
 </html>
