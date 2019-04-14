@@ -7,53 +7,70 @@
         <title>Prueba Anatod</title>
         <link href="css/estilo.css" rel="stylesheet" type="text/css" media="screen"> 
 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="Scripts/misScripts.js"></script>
+
     
     </head>
     <body>
-        <?php
-            include('class.database.php');
-            
-        ?>
-        <div class="container">
-            <button type="button" onClick="parent.location='nuevo.html'">Nuevo cliente</button>
-            <button type="button" onclick="parent.location='modificar.html'">Modificar cliente</button>
-            <h1> Listado de los clientes </h1>
-                                                     
-            <table class="table table-bordered  table-hover table-striped"> 
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>DNI</th>
-                        <th>Localidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+        <!--<div class="container"> -->
 
-                        $db = new class_db();
-                        $con = $db->conn ;
-                        $result = $con->query("SELECT clientes.id,clientes.nombre,clientes.dni,localidades.nombre AS localidad FROM clientes JOIN localidades ON clientes.localidad = localidades.id ORDER BY clientes.nombre") ;
-                        if ($result) {
-                                            
-                            while($row = $result->fetch_assoc()){
-                                    
-                    ?>
+            <?php include('class.database.php');?>
+            <div class="container" id="tabla" style="display:none;"> 
+                <button type="button" onClick="parent.location='nuevo.html'">Nuevo cliente</button>
+                <button type="button" onclick="parent.location='modificar.html'">Modificar cliente</button>
 
+                <h1> Listado de los clientes </h1>
+                                                         
+                <table class="table table-bordered  table-hover table-striped"> 
+                    <thead>
                         <tr>
-                            <td> <?php echo $row['id']; ?> </td>
-                            <td> <?php echo $row['nombre']; ?> </td>
-                            <td> <?php echo $row['dni']; ?> </td>
-                            <td> <?php echo $row['localidad']; ?> </td>
-
-                        </tr>                                       
-
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>DNI</th>
+                            <th>Localidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         <?php
-                                }
-                                    }
+
+                            $db = new class_db();
+                            $con = $db->conn ;
+                            $result = $con->query("SELECT clientes.id,clientes.nombre,clientes.dni,localidades.nombre AS localidad FROM clientes JOIN localidades ON clientes.localidad = localidades.id ORDER BY clientes.nombre") ;
+                            if ($result) {
+                                                
+                                while($row = $result->fetch_assoc()){
+                                        
                         ?>
-                    </tbody>
-            </table>
-        </div>
+
+                            <tr>
+                                <td> <?php echo $row['id']; ?> </td>
+                                <td> <?php echo $row['nombre']; ?> </td>
+                                <td> <?php echo $row['dni']; ?> </td>
+                                <td> <?php echo $row['localidad']; ?> </td>
+
+                            </tr>                                       
+
+                            <?php
+                                    }
+                                        }
+                            ?>
+                        </tbody>
+                </table>
+            </div>
+            
+
+            <div class="container" id="bienv">
+                <br><br><br><br><br><br><br>
+                <h1> Bienvenido al sistema! </h1>
+                <form>
+                    <h2> ¿Que desea hacer? </h2>
+                    <button type="button" id="todos">Ver todos los clientes</button>
+                    <button type="button" onClick="parent.location='nuevo.html'">Nuevo cliente</button>
+                    <button type="button" onclick="parent.location='modificar.html'">Modificar cliente</button>
+                </form>
+            </div>
+                                                     
+        <!--</div>-->
     </body>
 </html>

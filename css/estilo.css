@@ -56,4 +56,11 @@ button, form, #aplicar{
   /*text-align: center;*/
   margin: auto;
   width: 50%;
+  background: url(poly.jpg) no-repeat center fixed;
+  background-size: cover;
+}
+
+body{
+  background: url(foq.jpg) no-repeat center fixed;
+  background-size: auto;
 }
